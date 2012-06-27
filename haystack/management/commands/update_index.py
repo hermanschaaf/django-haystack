@@ -1,4 +1,8 @@
 import datetime
+try: 
+    from django.utils.timezone import now
+except ImportError:
+    from datetime.datetime import now
 import os
 import warnings
 from optparse import make_option
@@ -135,7 +139,7 @@ class Command(LabelCommand):
         end_date = options.get('end_date')
 
         if age is not None:
-            self.start_date = datetime.datetime.now() - datetime.timedelta(hours=int(age))
+            self.start_date = now() - datetime.timedelta(hours=int(age))
 
         if start_date is not None:
             from dateutil.parser import parse as dateutil_parse
